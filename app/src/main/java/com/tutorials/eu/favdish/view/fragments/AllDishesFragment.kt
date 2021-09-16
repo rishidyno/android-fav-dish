@@ -2,15 +2,17 @@ package com.tutorials.eu.favdish.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tutorials.eu.favdish.R
 import com.tutorials.eu.favdish.application.FavDishApplication
 import com.tutorials.eu.favdish.databinding.FragmentAllDishesBinding
+import com.tutorials.eu.favdish.model.entities.FavDish
 import com.tutorials.eu.favdish.view.activities.AddUpdateDishActivity
+import com.tutorials.eu.favdish.view.activities.MainActivity
 import com.tutorials.eu.favdish.view.adapters.FavDishAdapter
 import com.tutorials.eu.favdish.viewmodel.FavDishViewModel
 import com.tutorials.eu.favdish.viewmodel.FavDishViewModelFactory
@@ -63,8 +65,24 @@ class AllDishesFragment : Fragment() {
         }
     }
 
+    fun showDishDetails(favdish: FavDish){
+        findNavController().navigate(AllDishesFragmentDirections.actionNavigationAllDishesToNavigationDishDetail(
+            favdish))
+
+        if (requireActivity() is MainActivity){
+            (activity as MainActivity?)?.hideBottomNavigationView()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (requireActivity() is MainActivity){
+            (activity as MainActivity?)?.showBottomNavigationView()
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_all_dishes, menu)
+        inflater.inflate(R.menu.menu_add_dishes, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

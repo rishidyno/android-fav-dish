@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tutorials.eu.favdish.databinding.ItemDishLayoutBinding
 import com.tutorials.eu.favdish.model.entities.FavDish
+import com.tutorials.eu.favdish.view.fragments.AllDishesFragment
+import java.util.*
 
 class FavDishAdapter(private val fragment: Fragment) :
     RecyclerView.Adapter<FavDishAdapter.ViewHolder>() {
@@ -30,7 +32,13 @@ class FavDishAdapter(private val fragment: Fragment) :
         Glide.with(fragment)
             .load(dish.image)
             .into(holder.dishImage)
-        holder.dishTitle.text = dish.title.toUpperCase()
+        holder.dishTitle.text = dish.title.uppercase()
+
+        holder.itemView.setOnClickListener{
+            if(fragment is AllDishesFragment){
+                fragment.showDishDetails(dish)
+            }
+        }
 
     }
 
