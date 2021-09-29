@@ -18,7 +18,11 @@
         android:id="@+id/navigation_favorite_dishes"
         android:name="com.tutorials.eu.favdish.view.fragments.FavouriteDishesFragment"
         android:label="@string/title_favorite_dishes"
-        tools:layout="@layout/fragment_favourite_dishes" />
+        tools:layout="@layout/fragment_favourite_dishes" >
+        <action
+            android:id="@+id/action_navigation_favorite_dishes_to_navigation_dish_detail"
+            app:destination="@id/navigation_dish_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_random_dish"
@@ -33,8 +37,6 @@
         tools:layout="@layout/fragment_dish_details">
         <argument
             android:name="dishDetails"
-            app:argType="com.tutorials.eu.favdish.model.entities.FavDish"
-
-            />
+            app:argType="com.tutorials.eu.favdish.model.entities.FavDish" />
     </fragment>
 </navigation>
